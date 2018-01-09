@@ -1,0 +1,10 @@
+<h1> User List </h1>
+<div>
+  <div *ngFor="let user of users">
+    <img [src]="user.image" />
+    <h3> {{ user.title }}&nbsp;</h3>
+    <p> {{ user.summary }} </p>
+    <a [routerLink]="['/user', user._id]"> View Details </a>
+  </div>
+  <h3><a [routerLink] ="['']">Home</a></h3>
+</div>

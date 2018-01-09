@@ -1,0 +1,10 @@
+<h1> Campaign List </h1>
+<div>
+  <div *ngFor="let campaign of campaigns">
+    <img [src]="campaign.image" />
+    <h3> {{ campaign.title }}&nbsp;</h3>
+    <p> {{ campaign.summary }} </p>
+    <a [routerLink]="['/campaign', campaign._id]"> View Details </a>
+  </div>
+  <h3><a [routerLink] ="['']">Home</a></h3>
+</div>

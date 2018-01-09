@@ -1,0 +1,10 @@
+<h1> Event List </h1>
+<div>
+  <div *ngFor="let event of events">
+    <img [src]="event.image" />
+    <h3> {{ event.title }}&nbsp;</h3>
+    <p> {{ event.summary }} </p>
+    <a [routerLink]="['/event', event._id]"> View Details </a>
+  </div>
+  <h3><a [routerLink] ="['']">Home</a></h3>
+</div>
