@@ -1,8 +1,77 @@
 <header>
-  <p> Hello, {{ currentUser.fullName }}. </p>
+  <p> Hello, {{ currentUser.name }}. </p>
 
   <button (click)="logMeOutPls()"> Log Out </button>
   <p *ngIf="logoutError" class="error">
     {{ logoutError }}
   </p>
 </header>
+
+<h2> Campaigns List </h2>
+
+<p *ngIf="campaignListError" class="error">
+  {{ campaignListError }}
+</p>
+
+<button *ngIf="!isShowingForm" (click)="showCampaignForm()">
+  Add Campaign
+</button>
+
+<div *ngIf="isShowingForm">
+  <h3> Add a New Campaign </h3>
+
+  <p *ngIf="saveError" class="error">
+    {{ saveError }}
+  </p>
+
+  <form (ngSubmit)="saveNewCampaign()">
+    <label for="campaign-title-input"> Campaign Title </label>
+    <input  id="campaign-title-input" type="text" placeholder="Your Campaign Title"
+        [(ngModel)]="campaignTitle" name="campaignName">
+    <br>
+
+    <label for="campaign-summary-input"> Summary </label>
+    <input  id="campaign-summary-input" type="text"
+        [(ngModel)]="campaignSummary" name="campaignSummary">
+    <br>
+
+    <label for="campaign-goal-input"> End Goal </label>
+    <input  id="campaign-goal-input" type="text" placeholder="Whats the end goal?"
+        [(ngModel)]="campaignGoal" name="campaignGoal">
+    <br>
+
+    <!-- <label for="campaign-image-input"> Campaign Picture (optional)</label>
+    <input  id="campaign-image-input" type="file" name="campaignimage"
+        ng2FileSelect [uploader]="myCoolUploader">
+    <br> -->
+
+    <button> Save Campaign </button>
+  </form>
+</div>
+
+<!-- <ul>
+  <li *ngFor="let oneCampaign of campaignArray">
+    <h3> {{ oneCampaign.title }} </h3>
+
+      <img *ngIf="oneCampaign.image"
+          [src]="baseUrl + oneCampaign.image">
+
+      <div *ngIf="!oneCampaign.picture" [ngSwitch]="oneCampaign.goal">
+        <img *ngSwitchCase="0" src="/assets/images/horse.svg">
+        <img *ngSwitchCase="1" src="/assets/images/one-hump.svg">
+        <img *ngSwitchCase="2" src="/assets/images/two-humps.svg">
+      </div>
+    </div>
+
+    <p>
+      Owned by:
+      <b *ngIf="oneCampaign.user._id !== currentUser._id">
+        {{ oneCampaign.user.fullName }}
+      </b>
+
+      <b *ngIf="oneCampaign.user._id === currentUser._id">
+        YOU
+      </b>
+    </p>
+  </li>
+</ul> -->

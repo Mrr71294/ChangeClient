@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { RouterModule } from "@angular/router";
 import { routes } from './app.routing';
+import { FileUploadModule } from 'ng2-file-upload';
 //Import My Components/////////////////////////////////////////////////////////////
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { CampaignDetailsComponent } from './campaign-details/campaign-details.component';

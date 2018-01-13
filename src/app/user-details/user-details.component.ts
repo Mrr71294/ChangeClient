@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { FileUploader } from 'ng2-file-upload';
-
+import { FileUploader } from 'ng2-file-upload';
 import { environment } from '../../environments/environment';
 import { UserService } from '../services/user.service';
 import { CampaignService } from '../services/campaign.service';
+
 
 @Component({
   selector: 'app-user-details',
@@ -22,16 +22,17 @@ export class UserDetailsComponent implements OnInit {
 
   isShowingForm: boolean = false;
 
-  campaignName: string;
-  campaignColor: string = "#ffffff";
-  campaignHumps: number;
+  campaignTitle: string;
+  campaignSummary: string;
+  campaignGoal: string;
+
+  myCoolUploader = new FileUploader({
+    url: environment.apiBase + '/api/user/_:id',
+    itemAlias: 'campaignPicture'
+  });
 
   saveError: string;
 
-  // myCoolUploader = new FileUploader({
-  //   url: environment.apiBase + '/api/campaigns',
-  //   itemAlias: 'campaignPicture'
-  // });
 
   baseUrl = environment.apiBase;
 
@@ -45,7 +46,7 @@ export class UserDetailsComponent implements OnInit {
     this.userThang.checklogin()
       .then((userFromApi) => {
           this.currentUser = userFromApi;
-          this.getThemCamels();
+          // this.getThems();
       })
       .catch(() => {
           this.routerThang.navigate(['/']);
@@ -55,73 +56,74 @@ export class UserDetailsComponent implements OnInit {
   logMeOutPls() {
     this.userThang.logout()
       .then(() => {
-          this.routerThang.navigate(['/']);
+          this.routerThang.navigate(['/home']);
       })
       .catch(() => {
           this.logoutError = 'Log out went to 💩';
       });
   } // close logMeOutPls()
 
-  getThemCamels() {
-    this.campaignThang.allCamels()
+  getCampaigns() {
+    this.campaignThang.findAllCampaigns()
       .subscribe(
-        (allTheCamels) => {
-            this.campaignArray = allTheCamels;
+        (allTheCampaigns) => {
+            this.campaignArray = allTheCampaigns;
         },
         () => {
             this.campaignListError = 'Sorry everybody. No campaigns today. 😱';
         }
       );
-  } // close getThemCamels()
+  } // close getCampaigns()
 
-  showCamelForm() {
+  showCampaignForm() {
     this.isShowingForm = true;
-  } // close showCamelForm()
+  } // close showCampaignForm()
 
-  saveNewCamel() {
+  saveNewCampaign() {
     // if no picture, regular AJAX upload
     if (this.myCoolUploader.getNotUploadedItems().length === 0) {
-      this.saveCamelNoPicture();
+      this.saveCampaignNoPicture();
     }
 
     // else, upload pictures with uploader
     else {
-      this.saveCamelWithPicture();
+      this.saveCampaignWithPicture();
     }
-  } // close saveNewCamel()
+    this.routerThang.navigate(['/campaign']);
+  } // close saveNew()
 
-  private saveCamelNoPicture() {
-    this.campaignThang.newCamel(this.campaignName, this.campaignColor, this.campaignHumps)
-      .subscribe(
-        (newCamelFromApi) => {
-            this.campaignArray.push(newCamelFromApi);
+  private saveCampaignNoPicture() {
+    this.campaignThang.newCampaign(this.campaignTitle, this.campaignSummary, this.campaignGoal)
+      .then(
+        (newCampaignFromApi) => {
+            this.campaignArray.push(newCampaignFromApi);
             this.isShowingForm = false;
-            this.campaignName = "";
-            this.campaignColor = "#ffffff";
-            this.campaignHumps = undefined;
+            this.campaignTitle = this.campaignTitle;
+            this.campaignSummary = this.campaignSummary;
+            this.campaignGoal = this.campaignGoal;
             this.saveError = "";
         },
         (err) => {
             this.saveError = 'Don\t be a dumb 🐫';
         }
       );
-  } // close saveCamelNoPicture
+  } // close saveNoPicture
 
-  private saveCamelWithPicture() {
+  private saveCampaignWithPicture() {
     this.myCoolUploader.onBuildItemForm = (item, form) => {
-        form.append('campaignName', this.campaignName);
-        form.append('campaignColor', this.campaignColor);
-        form.append('campaignHumps', this.campaignHumps);
+        form.append('campaignTitle', this.campaignTitle);
+        form.append('campaignSummary', this.campaignSummary);
+        form.append('campaignGoal', this.campaignGoal);
     };
 
     this.myCoolUploader.onSuccessItem = (item, response) => {
         console.log(item);
-        const newCamelFromApi = JSON.parse(response);
-        this.campaignArray.push(newCamelFromApi);
+        const newCampaignFromApi = JSON.parse(response);
+        this.campaignArray.push(newCampaignFromApi);
         this.isShowingForm = false;
-        this.campaignName = "";
-        this.campaignColor = "#ffffff";
-        this.campaignHumps = undefined;
+        this.campaignTitle = this.campaignTitle;
+        this.campaignSummary = this.campaignSummary;
+        this.campaignGoal = this.campaignGoal;
         this.saveError = "";
     };
 
@@ -132,5 +134,5 @@ export class UserDetailsComponent implements OnInit {
 
     // this is the function that initiates the AJAX request
     this.myCoolUploader.uploadAll();
-  } // close saveCamelWithPicture
+  } // close saveWithPicture
 }

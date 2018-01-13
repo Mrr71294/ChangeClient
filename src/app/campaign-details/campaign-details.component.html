@@ -1,2 +1,6 @@
-<p> campaign-item Works! </p>
-<a [routerLink]="['/campaign']"> Back to list </a>
+<header>
+  <p> {{ currentCampaign.title }}. </p>
+
+  <a [routerLink]="['/user/_:id']"> Back to profile </a>
+
+</header>
