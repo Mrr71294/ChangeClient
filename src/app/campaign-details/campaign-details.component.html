@@ -1,6 +1,21 @@
-<header>
-  <p> {{ currentCampaign.title }}. </p>
+<h1> Campaign Details </h1>
+<a [routerLink]="['/user/_:id']"> Back to profile </a>
 
-  <a [routerLink]="['/user/_:id']"> Back to profile </a>
+<div *ngIf="campaign">
+  <div class="campaign-thumbnail">
+    <img height="300" [src]="campaign.image" />
+  </div>
 
-</header>
+  <div class="campaign-info">
+    <h2> {{ campaign.title }}</h2>
+    <h3> {{ campaign.summary }} </h3>
+
+    <!-- <div *ngIf="phone.specs.length">
+      <h4> Features </h4>
+      <ul>
+        <li *ngFor="let spec of phone.specs"> {{ spec }} </li>
+        <button (click)="deletePhone()"> Delete </button>
+      </ul>
+    </div> -->
+  </div>
+</div>

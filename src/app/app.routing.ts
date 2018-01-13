@@ -9,12 +9,12 @@ import { UserListComponent } from './user-list/user-list.component';
 import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
-    { path: 'campaign', component: CampaignListComponent },
+    { path: 'campaignList', component: CampaignListComponent },
     { path: 'campaign/:id', component: CampaignDetailsComponent },
-    { path: 'event', component: EventListComponent },
-    { path: 'event/:id', component: EventDetailsComponent },
-    { path: 'user', component: UserListComponent },
-    { path: 'user/:id', component: UserDetailsComponent },
+    { path: 'eventList', component: EventListComponent },
+    { path: 'event', component: EventDetailsComponent },
+    { path: 'userList', component: UserListComponent },
+    { path: 'user', component: UserDetailsComponent },
     { path: '', component: HomeComponent },
     { path: '**', redirectTo: '' }
 ];

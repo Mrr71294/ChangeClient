@@ -27,7 +27,7 @@ export class UserDetailsComponent implements OnInit {
   campaignGoal: string;
 
   myCoolUploader = new FileUploader({
-    url: environment.apiBase + '/api/user/_:id',
+    url: environment.apiBase + '/api/user/',
     itemAlias: 'campaignPicture'
   });
 
@@ -89,19 +89,21 @@ export class UserDetailsComponent implements OnInit {
     else {
       this.saveCampaignWithPicture();
     }
-    this.routerThang.navigate(['/campaign']);
   } // close saveNew()
 
   private saveCampaignNoPicture() {
     this.campaignThang.newCampaign(this.campaignTitle, this.campaignSummary, this.campaignGoal)
       .then(
         (newCampaignFromApi) => {
-            this.campaignArray.push(newCampaignFromApi);
+            this.campaignArray.push(newCampaignFromApi.theCampaign);
             this.isShowingForm = false;
             this.campaignTitle = this.campaignTitle;
             this.campaignSummary = this.campaignSummary;
             this.campaignGoal = this.campaignGoal;
             this.saveError = "";
+
+            this.routerThang.navigate(['/campaign', newCampaignFromApi.theCampaign._id]);
+
         },
         (err) => {
             this.saveError = 'Don\t be a dumb 🐫';
@@ -118,13 +120,16 @@ export class UserDetailsComponent implements OnInit {
 
     this.myCoolUploader.onSuccessItem = (item, response) => {
         console.log(item);
-        const newCampaignFromApi = JSON.parse(response);
+        const newCampaignFromApi = JSON.parse(response).theCampaign;
         this.campaignArray.push(newCampaignFromApi);
         this.isShowingForm = false;
         this.campaignTitle = this.campaignTitle;
         this.campaignSummary = this.campaignSummary;
         this.campaignGoal = this.campaignGoal;
         this.saveError = "";
+
+        this.routerThang.navigate(['/campaign', newCampaignFromApi._id]);
+
     };
 
     this.myCoolUploader.onErrorItem = (item, response) => {

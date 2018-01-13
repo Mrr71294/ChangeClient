@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/Router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CampaignService } from '../services/campaign.service';
 import { UserService } from '../services/user.service';
 
@@ -10,38 +10,32 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./campaign-details.component.css'],
 })
 export class CampaignDetailsComponent implements OnInit {
-
-  currentCampaign: any = {};
-  currentUser: any = {};
+  phone: any;
 
   constructor(
-    private campaignThang: CampaignService,
-    private userThang: UserService,
-    private routerThang: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private CampaignService: CampaignService,
+    private router: Router
   ) { }
 
-    ngOnInit() {
-      // this.route.params.subscribe((params) => {
-      //   this.showCampaign(params['id']);
-      // });
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.getCampaignDetails(params['id']);
+    });
+  }
 
-  } // close ngOnInit()
-
-  showCampaign(id) {
-    // if(this.route.params._value.id === undefined){
-    this.campaignThang.findOneCampaign(id)
-      .subscribe((campaignFromApi) => {
-          this.currentCampaign = campaignFromApi
-          })
-
-
-    this.userThang.checklogin()
-      .then((userFromApi) => {
-          this.currentUser = userFromApi
-          })
-      .catch(() => {
-          this.routerThang.navigate(['/']);
+  getCampaignDetails(id) {
+    this.CampaignService.findOneCampaign(id)
+      .subscribe((phone) => {
+        this.phone = phone;
       });
-}
+  }
+  deletePhone(){
+    if (window.confirm('Are you sure?')){
+      this.CampaignService.deleteCampaign(this.phone._id)
+      .subscribe(() => {
+        this.router.navigate(['/user']);
+      });
+    }
+  }
 }

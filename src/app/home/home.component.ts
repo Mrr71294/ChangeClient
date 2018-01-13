@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
       this.userservice.checklogin()
         // If success, we are logged in.
         .then((resultFromApi) => {
-            this.router.navigate(['/user/:id']);
+            this.router.navigate(['/user']);
         })
 
         // Even if you don't do anything on error, catch to avoid a console error.
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
             this.errorMessage = "";
 
             // redirect to /camels
-            this.router.navigate(['/user/:id']);
+            this.router.navigate(['/user']);
         })
         .catch((err) => {
             const parsedError = err.json();
@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit {
             this.loginErrorMessage = "";
 
             // redirect to /camels
-            this.router.navigate(['/user/:id']);
+            this.router.navigate(['/user']);
         })
         .catch((err) => {
             const parsedError = err.json();
