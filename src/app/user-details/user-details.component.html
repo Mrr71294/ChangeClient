@@ -1,2 +1,8 @@
-<p> user-item Works! </p>
-<a [routerLink]="['/user']"> Back to list </a>
+<header>
+  <p> Hello, {{ currentUser.fullName }}. </p>
+
+  <button (click)="logMeOutPls()"> Log Out </button>
+  <p *ngIf="logoutError" class="error">
+    {{ logoutError }}
+  </p>
+</header>
