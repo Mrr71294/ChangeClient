@@ -11,6 +11,7 @@ import { UserService } from '../services/user.service';
 })
 export class CampaignDetailsComponent implements OnInit {
   phone: any;
+  campaign: any;
 
   constructor(
     private route: ActivatedRoute,

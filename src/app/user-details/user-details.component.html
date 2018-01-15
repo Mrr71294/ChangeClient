@@ -49,29 +49,28 @@
   </form>
 </div>
 
-<!-- <ul>
-  <li *ngFor="let oneCampaign of campaignArray">
-    <h3> {{ oneCampaign.title }} </h3>
+  <ul>
+    <li *ngFor="let oneCampaign of campaignArray">
+      <h3> {{ oneCampaign.title }} </h3>
 
-      <img *ngIf="oneCampaign.image"
-          [src]="baseUrl + oneCampaign.image">
+      <div class="picture-wrap" [ngStyle]="{ 'background-color': red }">
+        <img *ngIf="oneCampaign.image"
+            [src]="baseUrl + oneCampaign.image">
 
-      <div *ngIf="!oneCampaign.picture" [ngSwitch]="oneCampaign.goal">
-        <img *ngSwitchCase="0" src="/assets/images/horse.svg">
-        <img *ngSwitchCase="1" src="/assets/images/one-hump.svg">
-        <img *ngSwitchCase="2" src="/assets/images/two-humps.svg">
+        <div class = anyClass>
+          <img  *ngIf="!oneCampaign.image" src="/assets/images/horse.svg">
+        </div>
       </div>
-    </div>
 
-    <p>
-      Owned by:
-      <b *ngIf="oneCampaign.user._id !== currentUser._id">
-        {{ oneCampaign.user.fullName }}
-      </b>
+      <!-- <p>
+        Created by:
+        <b *ngIf="oneCampaign.user._id !== currentUser._id">
+          {{ oneCampaign.user.fullName }}
+        </b>
 
-      <b *ngIf="oneCampaign.user._id === currentUser._id">
-        YOU
-      </b>
-    </p>
-  </li>
-</ul> -->
+        <b *ngIf="oneCampaign.user._id === currentUser._id">
+          YOU
+        </b>
+      </p> -->
+    </li>
+  </ul>

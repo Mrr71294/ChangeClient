@@ -10,8 +10,7 @@ export class CampaignService {
   BASE_URL: string = 'http://localhost:3000';
   constructor(private http: Http) {}
 
-  newCampaign(theFullName, theEmail, thePassword) {
-      console.log(theFullName)
+  newCampaign(campaignTitle, campaignSummary, campaignGoal) {
 
       return this.http
         .post(
@@ -19,9 +18,9 @@ export class CampaignService {
 
           // Form body information to send to the back end (req.body)
           {
-            title: theFullName,
-            summary: theEmail,
-            goal: thePassword,
+            title: campaignTitle,
+            summary: campaignSummary,
+            goal: campaignGoal,
 
           },
 

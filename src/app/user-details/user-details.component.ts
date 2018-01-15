@@ -46,11 +46,12 @@ export class UserDetailsComponent implements OnInit {
     this.userThang.checklogin()
       .then((userFromApi) => {
           this.currentUser = userFromApi;
-          // this.getThems();
+          this.getCampaigns();
       })
       .catch(() => {
           this.routerThang.navigate(['/']);
       });
+
   } // close ngOnInit()
 
   logMeOutPls() {
