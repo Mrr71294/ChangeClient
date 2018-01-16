@@ -1,11 +1,124 @@
-<div style="position: fixed;width: 100%;">
-  <video style="position: fixed; width: 100%; display: inline-block; vertical-align: baseline;" autoplay="" class="is-loaded banner" loop="" muted="" preload="metadata">
-    <source media="(min-width: 768px)" src="http://antiphrastical-date.000webhostapp.com/WorldVideo.mp4" type="video/mp4">
-  </video>
-<div class="container">
+<nav class="navbar navbar-default navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand"[routerLink] ="['/home']">Agents Of Change</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Profile</a></li>
+        <li><a [routerLink] ="['/campaignList']">Campaigns</a></li>
+
+        <!-- <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li> -->
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><p class="navbar-text">Already have an account?</p></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+			<ul id="login-dp" class="dropdown-menu">
+				<li>
+					 <div class="row">
+							<div class="col-md-12">
+                  <div class="form-body">
+                  <ul class="nav nav-tabs final-login">
+                      <li class="active"><a data-toggle="tab" href="#sectionA">Sign In</a></li>
+                      <li><a data-toggle="tab" href="#sectionB">Join us!</a></li>
+                  </ul>
+                  <div class="tab-content">
+                      <div id="sectionA" class="tab-pane fade in active">
+                      <div class="innter-form">
+                          <form class="sa-innate-form" (ngSubmit)="doLogin()">
+                            <label>Email Address</label>
+                            <input type="text" name="username"
+                            [(ngModel)]="loginEmail" name="loginEmail">
+                            <label>Password</label>
+                            <input type="password" name="password"
+                            [(ngModel)]="loginPassword" name="loginPassword">
+                            <button type="submit">Sign In</button>
+                            <a href="">Forgot Password?</a>
+                          </form>
+                        </div>
+                          <div class="social-login">
+                          <p>- - - - - - - - - - - - - Sign In With - - - - - - - - - - - - - </p>
+                  		    <ul>
+                            <li><a href=""><i class="fa fa-facebook"></i> Facebook</a></li>
+                            <li><a href=""><i class="fa fa-google-plus"></i> Google+</a></li>
+                            <li><a href=""><i class="fa fa-twitter"></i> Twitter</a></li>
+                          </ul>
+                          </div>
+                          <div class="clearfix"></div>
+                          </div>
+                          <div id="sectionB" class="tab-pane fade">
+                    			<div class="innter-form">
+                            <form class="sa-innate-form" (ngSubmit)="doSignUp()">
+                              <label>Name</label>
+                              <input type="text" name="username"
+                              [(ngModel)]="fullNameValue" name="fullNameValue">
+                              <label>Email Address</label>
+                              <input type="text" name="username"
+                              [(ngModel)]="emailValue" name="emailValue">
+                              <label>Password</label>
+                              <input type="password" name="password"
+                              [(ngModel)]="passwordValue" name="passwordValue">
+                              <button> Join now </button>
+                            </form>
+                          </div>
+                          <div class="social-login">
+                          <p>- - - - - - - - - - - - - Register With - - - - - - - - - - - - - </p>
+                    			<ul>
+                          <li><a href=""><i class="fa fa-facebook"></i> Facebook</a></li>
+                          <li><a href=""><i class="fa fa-google-plus"></i> Google+</a></li>
+                          <li><a href=""><i class="fa fa-twitter"></i> Twitter</a></li>
+                          </ul>
+                          </div>
+                      </div>
+                  </div>
+                  </div>
+              </div>
+					 </div>
+				</li>
+			</ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+      <video id="worldVideo" autoplay="" class="is-loaded banner" loop="" muted="" preload="metadata">
+        <source media="(min-width: 768px)" src="http://antiphrastical-date.000webhostapp.com/WorldVideo.mp4" type="video/mp4">
+        </video>
+
+<!-- <div class="row" class="spacer">SPACERR</div>
+
 <div class="row">
-<div class="col-md-4 ">
-<div class="form-body">
+  <div class="col-md-4 cat ">TWO</div>
+
+  <div class="col-md-4">ONE
+    <div class="form-body">
     <ul class="nav nav-tabs final-login">
         <li class="active"><a data-toggle="tab" href="#sectionA">Sign In</a></li>
         <li><a data-toggle="tab" href="#sectionB">Join us!</a></li>
@@ -60,6 +173,7 @@
         </div>
     </div>
     </div>
-    </div>
-    </div>
-    </div>
+</div>
+<div class="col-md-4 ">THREE</div>
+
+</div> -->
