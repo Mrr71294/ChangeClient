@@ -10,13 +10,14 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./campaign-details.component.css'],
 })
 export class CampaignDetailsComponent implements OnInit {
-  phone: any;
-  campaign: any;
+  campaign: any = {}
 
   constructor(
     private route: ActivatedRoute,
     private CampaignService: CampaignService,
-    private router: Router
+    private router: Router,
+    private userThang: UserService,
+
   ) { }
 
   ngOnInit() {
@@ -27,16 +28,24 @@ export class CampaignDetailsComponent implements OnInit {
 
   getCampaignDetails(id) {
     this.CampaignService.findOneCampaign(id)
-      .subscribe((phone) => {
-        this.phone = phone;
+      .subscribe((campaign) => {
+        this.campaign = campaign;
       });
   }
-  deletePhone(){
+  deleteCampaign(){
     if (window.confirm('Are you sure?')){
-      this.CampaignService.deleteCampaign(this.phone._id)
+      this.CampaignService.deleteCampaign(this.campaign._id)
       .subscribe(() => {
         this.router.navigate(['/user']);
       });
     }
   }
+
+  logMeOutPls() {
+    this.userThang.logout()
+      .then(() => {
+          this.router.navigate(['/home']);
+      })
+  } // close logMeOutPls()
+
 }

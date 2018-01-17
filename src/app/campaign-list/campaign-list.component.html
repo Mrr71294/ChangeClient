@@ -32,16 +32,15 @@
 <!-- //////////////////////////////////////////////////////////////////////////////// -->
 <div class="container">
   <div class="row">
-<h1> Campaign List </h1>
-<div>
-  <div *ngFor="let campaign of campaigns">
-    <img [src]="campaign.image" />
+    <h1> Campaign List </h1>
+<div class="row">
+  <div *ngFor="let campaign of campaigns" class="col-sm-3">
+    <img src="https://antiphrastical-date.000webhostapp.com/the-campaign-poster1.jpg" class="campaignImage"/>
     <h3> {{ campaign.title }}&nbsp;</h3>
     <p> Summary: {{ campaign.summary }} </p>
     <p> Goal: {{ campaign.goal }} </p>
     <a [routerLink]="['/campaign', campaign._id]"> View Details </a>
   </div>
-  <h3><a [routerLink] ="['']">Home</a></h3>
-</div>
+</div>ROW
 </div>ROW
 </div>Container

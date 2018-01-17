@@ -57,7 +57,7 @@ export class UserDetailsComponent implements OnInit {
   logMeOutPls() {
     this.userThang.logout()
       .then(() => {
-          this.routerThang.navigate(['/home']);
+          this.routerThang.navigate(['/']);
       })
       .catch(() => {
           this.logoutError = 'Log out went to 💩';
@@ -69,6 +69,7 @@ export class UserDetailsComponent implements OnInit {
       .subscribe(
         (allTheCampaigns) => {
             this.campaignArray = allTheCampaigns;
+            console.log(allTheCampaigns);
         },
         () => {
             this.campaignListError = 'Sorry everybody. No campaigns today. 😱';
