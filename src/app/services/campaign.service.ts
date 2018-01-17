@@ -46,9 +46,46 @@ export class CampaignService {
       .map((res) => res.json());
   }
 
-  updateCampaign(campaign) {
-    return this.http.put(`${this.BASE_URL}/api/campaign/update/${campaign.id}`, campaign)
-      .map((res) => res.json());
+
+
+  editOneCampaign(id, componentInfo){
+    return this.http.put(`${this.BASE_URL}/api/campaign/findOne/${id}`,
+      {
+        title: componentInfo.title,
+        summary: componentInfo.summary,
+        goal: componentInfo.goal
+      },
+      { withCredentials: true })
+      .map( res => res.json())
+}
+
+//   editClient(id, componentInfo){
+// return this.http
+// .put(
+//   `${environment.apiBase}/api/client/`+id,
+//   {
+//     clientFirstName: componentInfo.clientFirstName,
+//     clientLastName: componentInfo.clientLastName,
+//     clientUsername: componentInfo.clientUsername,
+//     clientPrimaryPhone: componentInfo.clientPrimaryPhone,
+//     clientStreet1: componentInfo.clientStreet1,
+//     clientStreet2: componentInfo.clientStreet2,
+//     clientCity: componentInfo.clientCity,
+//     clientProvince: componentInfo.clientProvince,
+//     clientZip: componentInfo.clientZip
+//   },
+//   // Send the cookies across domains
+//   { withCredentials: true })
+//   .map( res => res.json())
+// }
+
+  updateCampaign(campaignId, dataToSend) {
+    console.log("dataToSend", dataToSend)
+    return this.http.put(`${this.BASE_URL}/api/campaign/update/${campaignId}`, dataToSend)
+      .toPromise() 
+      .then(apiResponse => apiResponse.json())
+
+      // .map((res) => res.json());
   }
 
   deleteCampaign(id) {

@@ -46,7 +46,6 @@ export class HomeComponent implements OnInit {
       this.userservice.signup(this.fullNameValue, this.emailValue, this.passwordValue)
         .then((resultFromApi) => {
             // clear form
-            console.log(this.fullNameValue)
             this.fullNameValue = "";
             this.emailValue = "";
             this.passwordValue = "";
