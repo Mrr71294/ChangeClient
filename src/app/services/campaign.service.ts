@@ -56,7 +56,8 @@ export class CampaignService {
         goal: componentInfo.goal
       },
       { withCredentials: true })
-      .map( res => res.json())
+      .toPromise()
+      .then( res => res.json())
 }
 
 //   editClient(id, componentInfo){
@@ -82,7 +83,7 @@ export class CampaignService {
   updateCampaign(campaignId, dataToSend) {
     console.log("dataToSend", dataToSend)
     return this.http.put(`${this.BASE_URL}/api/campaign/update/${campaignId}`, dataToSend)
-      .toPromise() 
+      .toPromise()
       .then(apiResponse => apiResponse.json())
 
       // .map((res) => res.json());

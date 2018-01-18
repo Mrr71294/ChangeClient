@@ -38,6 +38,9 @@
     <img align="left" class="fb-image-profile thumbnail" src="https://antiphrastical-date.000webhostapp.com/placeholder-man-grid-240x268.png" alt="Profile image example"/>
         <h1>Hello, {{ currentUser.name }}</h1>
         <p>"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."!</p>
+        <button *ngIf="!isShowingForm" (click)="showCampaignForm()">
+          Add Campaign
+        </button>
       </div>
 
   <div class="row formRow">
@@ -51,9 +54,6 @@
   {{ campaignListError }}
 </p>
 
-<button *ngIf="!isShowingForm" (click)="showCampaignForm()">
-  Add Campaign
-</button>
 
 <div *ngIf="isShowingForm">
   <h3> Add a New Campaign </h3>
@@ -62,45 +62,23 @@
     {{ saveError }}
   </p>
 
-  <form role="form">
+  <form (ngSubmit)="saveNewCampaign()">
   <br style="clear:both">
     <h3 style="margin-bottom: 25px; text-align: center;">New Campaign Form</h3>
     <div class="form-group">
-      <input type="text" class="form-control" id="name" name="title"placeholder="Title" required
-      [(ngModel)]="fullNameValue">
+      <input type="text"  [(ngModel)]="campaignTitle" class="form-control" id="campaignTitle" name="campaignTitle" placeholder="Title">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
+      <input type="text"  [(ngModel)]="campaignGoal"  class="form-control" id="campaignGoal" name="campaignGoal" placeholder="Goal">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" required>
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" required>
-    </div>
-    <div class="form-group">
-       <textarea class="form-control" type="textarea" id="message" placeholder="Message" maxlength="140" rows="7"></textarea>
-       <span class="help-block"><p id="characterLeft" class="help-block ">You have reached the limit</p></span>
+       <textarea [(ngModel)]="campaignSummary" class="form-control" type="textarea" name="campaignSummary" id="campaignSummary" placeholder="Summary" maxlength="650" rows="7"></textarea>
     </div>
 
-  <button type="button" id="submit" name="submit" class="btn btn-primary pull-right">Submit Form</button>
+
+  <button type="submit" class="btn btn-primary pull-right">Submit Form</button>
   </form>
 
 </div>
-
-  <!-- <ul>
-    <li *ngFor="let oneCampaign of campaignArray">
-      <h3> {{ oneCampaign.title }} </h3>
-
-      <div class="picture-wrap" [ngStyle]="{ 'background-color': red }">
-        <img *ngIf="oneCampaign.image"
-            [src]="baseUrl + oneCampaign.image">
-
-        <div class = anyClass>
-          <img  *ngIf="!oneCampaign.image" src="/assets/images/horse.svg">
-        </div>
-      </div>
-    </li>
-  </ul> -->
   </div>
 </div>
